@@ -2,7 +2,7 @@
 
 <div align="center">
 
-<img src="assets/roadmap.png" width="880" alt="12-week roadmap">
+<img src="assets/Roadmap.png" width="880" alt="12-week roadmap">
 
 # Project Bedrock
 
