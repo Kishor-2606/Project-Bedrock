@@ -1,105 +1,121 @@
 #Student ReportCard Generator
 
 
-class srg:
-    
-    def __init__(self,std_id,std_name,no_of_sub):
-        self.details={}
+class Student:
+    def __init__(self,std_id,std_name,subject_marks):
         self.student_id=std_id
         self.student_name=std_name
-        self.details["student_id"]=std_id
-        self.details["name"]=std_name
-        self.no_of_sub=no_of_sub
-        self.details["sub_mark"]={}
-        self.grd=""
-        self.avg=0
+        self.subjects_marks=subject_marks
 
-    def sub_mark(self,subject,mark):
-        self.details["sub_mark"][subject]=mark
+    def calculate_average(self):
+        return (sum(self.subjects_marks.values()))/len(self.subjects_marks)
 
-    def average(self):
-        self.avg=0
-        for key,value in self.details["sub_mark"].items():
-            self.avg+=value
-
-        self.avg=self.avg//self.no_of_sub
-        return self.avg
-
-    def grade(self):
-        if self.avg >=90:
-            self.grd="A"
-        elif self.avg>=70:
-            self.grd="B"
-        elif self.avg>=50:
-            self.grd="C"
+    def calculate_grade(self,average):
+        if average >=90:
+            return average,"A"
+        elif average>=70:
+            return average,"B"
+        elif average>=50:
+            return average,"C"
         else:
-            self.grd="F"
-        return self.grd
+            return average,"F"
 
-    def view_report_card(self):
-        print("                                     Report Card                                                 ")
-        print()
-        print(f"                                    Haii {self.student_name}                                    ")
-        print()
-        print("-------------------------------------------------------------------------------------------------")
-        print()
-        print(f"                            you scored {self.average()} as average                              ")
-        print()
-        print("-------------------------------------------------------------------------------------------------")
-        print()
-        print(f"                               So your grade is {self.grade()}                                  ")
+class Application:
+
+    def __init__(self):
+        student_id,student_name,no_of_sub=self.get_student_details()
         
+        subject_marks=self.get_marks(no_of_sub)
 
+        self.student=Student(student_id,student_name,subject_marks)
+    
+    
 
-def report_card_generator():
-    flag_id=True
-    flag_name=True
-    flag_count=True
-    flag_sub_marks=True
-    obj_created=False
-    while(True):
-        if flag_id:
+    def generate_report(self):
+            average=self.calculate_average()
+            grade=self.student.calculate_grade(average)
+            return{
+                "student_id":self.student.student_id,
+                "student_name":self.student.student_name,
+                "average":average,
+                "grade":grade
+            }
+
+    def report_card_presentation(self,report):
+        print("===================================================")
+        print("                   Report Card                     ")
+        print("===================================================")
+        print("       Student ID : ",report["student_id"])
+        print("       Name       : ",report["student_name"])
+        print("       Average    : ",report["average"])
+        print("       Grade      : ",report["grade"])
+
+    
+  
+    def get_student_details(self):
+        while True:
             try:
-                std_id=int(input("Enter your student id:"))
-                flag_id=False
-            except Exception:
-                print(f"please verify your student id {std_id}")
-                flag_id=True
-                continue
-        if flag_name:
+                std_id=int(input("Enter your student id :"))
+                if std_id<=0:
+                    print("Please enter the valid student_id ")
+                    continue
+            except ValueError:
+                print(f"please verify your student id ")
+            else:
+                break
+
+        while True:
             try:
-                std_name=input("Enter your name:")
-                flag_name=False
-            except Exception:
+                std_name=input("Enter your name :")
+                if std_name=="":
+                    print("Please enter the valid name")
+                    continue
+            except ValueError:
                 print(f"please verify your student name {std_name}")
-                flag_name=True
-                continue
-        if flag_count:
+            else:
+                break
+        while True:
             try:
-                no_of_sub=int(input("Enter the number of subject"))
-                flag_count=False
-            except Exception:
+                no_of_sub=int(input("Enter the number of subject :"))
+                if no_of_sub<0 or no_of_sub>10:
+                    print("Please enter the valid subject count")
+                    continue
+            except ValueError:
                 print(f"please verify your subcount {no_of_sub}")
-                flag_count=True
-                continue
-        if obj_created==False:
-            std=srg(std_id,std_name,no_of_sub)
-            obj_created=True
-        if flag_sub_marks:
-            try:
-                for i in range(no_of_sub):
-                    subject=input(f"Enter your {i+1}th subject : ")
-                    mark=int(input(f"Enter you mark on {subject} : "))
-                    std.sub_mark(subject,mark)
-                flag_sub_marks=False
-            except Exception:
-                print(f"Be carefull while entring the marks else you have to reenter")
-                flag_sub_marks=True
-                continue
-        
-        if flag_id==False and flag_name==False and flag_count==False and flag_sub_marks==False:
-            std.view_report_card()
-            break
+            else:
+                break
 
-if __name__=="__main__":
-    report_card_generator()
+        return std_id,std_name,no_of_sub
+
+    def get_marks(self,no_of_sub):
+        subject_marks={}
+        i=0
+        while i<(no_of_sub):
+            try:
+                subject=input(f"Enter your {i+1}th subject : ")
+                if subject=="":
+                    print("please enter the valid subject name")
+                    continue
+                if subject in subject_marks:
+                    print("This subject already exhist")
+                    continue
+
+                mark=int(input(f"Enter you mark on {subject} : "))
+                if mark<0 or mark>100:
+                    print("Please enter the valid marks")
+                    continue
+                
+            except ValueError:
+                print("Please enter the valid subject name and marks")
+            else:
+                i=i+1
+                subject_marks[subject]=mark
+        return subject_marks
+
+app=Application()
+
+report=app.generate_report()
+
+
+app.report_card_presentation(report)
+
