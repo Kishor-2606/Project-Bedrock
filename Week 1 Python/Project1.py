@@ -32,7 +32,7 @@ class Application:
     
 
     def generate_report(self):
-            average=self.calculate_average()
+            average=self.student.calculate_average()
             grade=self.student.calculate_grade(average)
             return{
                 "student_id":self.student.student_id,
