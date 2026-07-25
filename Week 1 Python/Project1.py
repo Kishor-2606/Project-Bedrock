@@ -118,4 +118,3 @@ report=app.generate_report()
 
 
 app.report_card_presentation(report)
-
