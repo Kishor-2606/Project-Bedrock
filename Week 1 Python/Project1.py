@@ -12,13 +12,13 @@ class Student:
 
     def calculate_grade(self,average):
         if average >=90:
-            return average,"A"
+            return "A"
         elif average>=70:
-            return average,"B"
+            return "B"
         elif average>=50:
-            return average,"C"
+            return "C"
         else:
-            return average,"F"
+            return "F"
 
 class Application:
 
@@ -77,7 +77,7 @@ class Application:
         while True:
             try:
                 no_of_sub=int(input("Enter the number of subject :"))
-                if no_of_sub<0 or no_of_sub>10:
+                if no_of_sub<=0 or no_of_sub>10:
                     print("Please enter the valid subject count")
                     continue
             except ValueError:
