@@ -83,7 +83,7 @@ class Application:
         elif option==2:
             while True:
                 try:
-                    expense_delete=input("Enter the expense title to delete :")
+                    expense_delete=input("Enter the expense title to delete :").lower().strip()
                     if expense_delete=="":
                         print("Please enter the valid expense")
                         continue
@@ -116,7 +116,7 @@ class Application:
                     if filter_option==1:
                         while True:
                             try:
-                                filter_title=input("enter the expense title")
+                                filter_title=input("enter the expense title").lower().strip()
                                 if filter_title=="":
                                     print("Please enter the valid title")
                                     continue
@@ -144,7 +144,7 @@ class Application:
                     if filter_option==3:
                         while True:
                             try:
-                                filter_category=input("enter the expense category")
+                                filter_category=(input("enter the expense category").lower()).strip()
                                 if filter_category=="":
                                     print("Please enter the valid category")
                                     continue
@@ -170,7 +170,7 @@ class Application:
                 Press 5 to VIEW EXPENSES
                 Press 6 to QUIT
                 """))
-                
+
                 if option==6:
                     print("Thank you!, Come again")
                     break
@@ -187,7 +187,7 @@ class Application:
         print("This is your Expense Tracker")
         while True:
             try:
-                expense_title=input("Enter your expense title : ")
+                expense_title=input("Enter your expense title : ").strip()
                 if expense_title=="":
                     continue
                 elif (expense_title.replace(" ","").isdigit()):
@@ -212,10 +212,10 @@ class Application:
                 break
         while True:
             try:
-                expense_category=input("describe your expense category in single word like(food,travel,house rent,snack,entertainment,etc..): ")
+                expense_category=input("describe your expense category in single word like(food,travel,house rent,snack,entertainment,etc..): ").strip()
                 if expense_category=="":
                     continue
-                elif (expense_title.replace(" ","").isdigit()):
+                elif (expense_category.replace(" ","").isdigit()):
                     print("Please enter the valid expense category")
                     continue
                 else:
