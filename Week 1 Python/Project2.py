@@ -158,16 +158,19 @@ class Application:
                     break
         elif option==5:
             self.view_all_expenses()
+
     def menu(self):
         while True:
             try:
-                option=int(input("""Press 1 to ADD EXPENSE
+                option=int(input("""
+                Press 1 to ADD EXPENSE
                 Press 2 to DELETE EXPENSE
                 Press 3 to SHOW TOTAL
                 Press 4 to FILTER
                 Press 5 to VIEW EXPENSES
-                Press 6 to QUIT"""))
-
+                Press 6 to QUIT
+                """))
+                
                 if option==6:
                     print("Thank you!, Come again")
                     break
@@ -180,13 +183,15 @@ class Application:
             else:
                 self.menu_options(option)
 
-
     def add_expense(self):
         print("This is your Expense Tracker")
         while True:
             try:
                 expense_title=input("Enter your expense title : ")
                 if expense_title=="":
+                    continue
+                elif (expense_title.replace(" ","").isdigit()):
+                    print("Please enter the valid expense Title")
                     continue
                 else:
                     expense_title=expense_title.lower()
@@ -210,6 +215,9 @@ class Application:
                 expense_category=input("describe your expense category in single word like(food,travel,house rent,snack,entertainment,etc..): ")
                 if expense_category=="":
                     continue
+                elif (expense_title.replace(" ","").isdigit()):
+                    print("Please enter the valid expense category")
+                    continue
                 else:
                     expense_category=expense_category.lower()
             except ValueError:
@@ -219,5 +227,8 @@ class Application:
                 break
         return expense_title,expense_price,expense_category
 
+if __name__=="__main__":
+    app=Application()
+    app.menu()
 
         
