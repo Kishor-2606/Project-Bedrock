@@ -33,7 +33,7 @@ Project Bedrock is a structured attempt to close that gap: rebuilding the fundam
 |:---:|---|---|:---:|
 | 01 | Python foundations, OOP basics, exception handling | Standalone script/CLI project | ✅ |
 | 02 | API fundamentals — REST, FastAPI, Pydantic | API-powered application | ✅ |
-| 03 | SQL (MySQL) | Schema design, queries, joins | ⬜ |
+| 03 | SQL (MySQL) | Schema design, queries, joins | ✅ |
 | 04 | End-to-end integration | App wired to MySQL | ⬜ |
 | 05 | Math foundations — linear algebra, statistics, calculus | Worked problem sets | ⬜ |
 | 06 | NumPy & Pandas | Data analysis + visualization | ⬜ |
